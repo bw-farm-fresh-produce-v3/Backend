@@ -1,0 +1,24 @@
+{
+  "name": "farm-fresh-produce-v3-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bw-farm-fresh-produce-v3/Backend.git"
+  },
+  "author": "Moses A. Samuel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bw-farm-fresh-produce-v3/Backend/issues"
+  },
+  "homepage": "https://github.com/bw-farm-fresh-produce-v3/Backend#readme",
+  "dependencies": {
+    "knex": "^0.20.4",
+    "pg": "^7.15.1",
+    "sqlite": "^3.0.3"
+  }
+}
