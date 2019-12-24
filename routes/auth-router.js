@@ -43,6 +43,15 @@ router.post('/login', async (req, res) => {
     res.status(404).json({ error: { message: `Couldn't find the user ${req.body.username}`}})
   }
 
+  router.post('/logout', function  (req, res) {
+    if (req.token) {
+      req.token.destroy()
+      res.status(200).send("Logged out successfully. Goodbye 👋🏾")
+    } else {
+      res.status(401).send("Invalid request: Please supply a token in the body of your request.")
+    }
+  })
+
   function generateToken(user) {
     const payload = {
       username: user.username,
