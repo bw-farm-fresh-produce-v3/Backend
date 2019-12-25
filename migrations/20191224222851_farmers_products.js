@@ -1,6 +1,10 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('farmers-products', tbl => {
+        // Each farmer's prodcuts
+        // Can have many farmers
+        // Can only have 1 local UNIQUE CONSTRAINT
+        // Can have many (repeat) products
         tbl.increments()
         tbl.timestamps(true, true)
 

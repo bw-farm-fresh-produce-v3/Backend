@@ -1,6 +1,8 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('customers', tbl => {
+        // Can have many orders
+        // Can have one local
         tbl.increments()
         tbl.timestamps()
 

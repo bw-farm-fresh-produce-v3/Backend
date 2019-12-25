@@ -1,6 +1,9 @@
 
 exports.up = function(knex) {
     return knex.schema.createTable('products', tbl => {
+        // Can have many farmers 
+        // Can have many orders
+        // Can have many locals
         tbl.increments()
         tbl.timestamps()
 
