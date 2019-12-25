@@ -5,7 +5,7 @@ const db = require('../data/dbConfig')
 
 describe('Environment', () => {
     it('should have a NODE_ENV value of "test"', () => {
-        expect(process.env.NODE_ENV).toBe("testing")
+        expect(process.env.NODE_ENV).toBe("test")
     })
 })
 
@@ -150,39 +150,5 @@ describe('Auth Router', () => {
             
             expect(status).toBe(200)
         })
-    })
-})
-
-describe('Jokes Router', () => {
-    it('should return a list of jokes', async() => {
-        // login new user 
-        const { body: { token } } = await request(server)
-            .post('/api/auth/login')
-            .send({
-                username: 'Pickle Rick',
-                password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
-            })
-        
-        const { body: jokes } = await request(server)
-            .get('/api/jokes')
-            .set('Authorization', token)
-        
-        expect(jokes.slice(0,10)).toHaveLength(10)
-    })
-
-    it('should return a status of 200', async () => {
-        // login new user 
-        const { body: { token } } = await request(server)
-            .post('/api/auth/login')
-            .send({
-                username: 'Pickle Rick',
-                password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
-            })
-
-        const { status } = await request(server)
-        .get('/api/jokes')
-        .set('Authorization', token)
-
-        expect(status).toBe(200)
     })
 })
