@@ -8,7 +8,7 @@ exports.up = function(knex) {
         tbl.increments()
         tbl.timestamps(true, true)
 
-        table.datetime('date', { precision: 6 }).defaultTo(knex.fn.now(6))
+        tbl.datetime('date', { precision: 6 }).notNullable()
         tbl.string('farmer-product-id')
             .notNullable()
             .references('id')
