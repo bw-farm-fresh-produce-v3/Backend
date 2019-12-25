@@ -6,8 +6,18 @@ exports.up = function(knex) {
         // farmer's products. UNIQUE CONSTAINT
         tbl.increments()
 
-        tbl.integer('customers-id').notNullable()
-        tbl.integer('farmer-product-id').notNullable()
+        tbl.integer('customers-id')
+            .notNullable()
+            .references('id')
+            .inTable('customers')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE')
+        tbl.integer('farmer-product-id')
+            .notNullable()
+            .references('id')
+            .inTable('farmers-products')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE')
     })
 };
 

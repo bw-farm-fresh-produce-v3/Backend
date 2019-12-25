@@ -4,7 +4,12 @@ exports.up = function(knex) {
         tbl.increments()
         tbl.timestamps()
 
-        tbl.integer('orders-id').notNullable()
+        tbl.integer('orders-id')
+            .notNullable()
+            .references('id')
+            .inTable('orders')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE')
         tbl.string('username').notNullable()
         tbl.string('password').notNullable()
     })
