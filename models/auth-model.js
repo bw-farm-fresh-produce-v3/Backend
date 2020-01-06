@@ -5,27 +5,49 @@ module.exports = {
         return db('users')
     },
 
-    findByUsername(username) {
+    findByEmail(email) {
         return db('users')
-            .where({username})
+            .where({email})
+            .first()
+    },
+
+    findById(id) {
+        return db('users')
+            .where({id})
             .first()
     },
 
     async create(user) {
-        await db('users').insert(user, 'username')
+        await db('users').insert(user)
         
-        return this.findByUsername(user.username)
+        return this.findByEmail(user.email)
     },
 
-    async update(username, changes) {
-        await db('users').update(changes)
+    async updateById(id, changes) {
+        await db('users')
+            .where({id})
+            .update(changes)
 
-        return this.findByUsername(username)
+        return this.findById(id)
     },
 
-    delete(id) {
+    async updateByEmail(email, changes) {
+        await db('users')
+            .where({email})
+            .update(changes)
+
+        return this.findByEmail(email)
+    },
+
+    deleteById(id) {
         return db('users')
             .where({id})
+            .delete()
+    }, 
+
+    deleteByEmail(email) {
+        return db('users')
+            .where({email})
             .delete()
     }
 }
