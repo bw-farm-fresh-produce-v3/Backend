@@ -19,7 +19,12 @@ server.use(cors())
 /**
  * Routes
  */
+ 
 server.use('/api/auth', authRouter)
+
+server.get('/', function ping (req, res) {
+    res.status(200).json({ api: "running" })
+})
 
 server.use(function notFound(req, res, next) {
     const error = new Error('Not found.')
