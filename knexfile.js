@@ -1,57 +1,26 @@
 module.exports = {
   development: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: './data/dev.db3',
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
-    },
+    client: 'pg',
+    connection:'postgres://localhost/bw_farm_fresh_produce',
     migrations: {
       directory: './data/migrations',
     },
     seeds: {
       directory: './data/seeds',
     },
+    useNullAsDefault: true
   },
 
   test: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: './data/test.db3',
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
-    },
+    client: 'pg',
+    connection:'postgres://localhost/bw_farm_fresh_produce_test',
     migrations: {
       directory: './data/migrations',
     },
     seeds: {
       directory: './data/seeds',
     },
-  },
-
-
-  staging: {
-    client: 'postgresql',
-    // TODO: Change this URL to that of deployed db
-    connection: "postgres://localhost/webauth-iii-challenge",
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: {
-      directory: './data/seeds',
-    },
+    useNullAsDefault: true
   },
 
   production: {
