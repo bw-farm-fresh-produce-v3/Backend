@@ -10,7 +10,8 @@ router.post('/register', (req, res) => {
     bcrypt.hash(req.body.password, 8, async (err, encryptedPw) => {
       if (err) res.status(500).json({error: { message: 'Internal server error.'}})
       else {
-        req.body.password = encryptedPw
+        req.body.password_hash = encryptedPw
+        delete req.body.password
         const newUser = await authModel.create(req.body)
         res.status(201).json(newUser)
       }
@@ -23,14 +24,14 @@ router.post('/register', (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const user = await authModel.findByUsername(req.body.username)
+    const user = await authModel.findByEmail(req.body.email)
     
-    bcrypt.compare(req.body.password, user.password, (err, passwordsMatch) => {
+    bcrypt.compare(req.body.password, user.password_hash, (err, passwordsMatch) => {
       if (err) res.status(500).json({ error: { message: 'Internal server error.'}})
       else {
         if (passwordsMatch) {
           res.status(200).json({
-            success: `Welcome ${user.username}!`,
+            success: user.first_name ? `Welcome ${user.first_name}!` : `Welcome ${user.email}`,
             user,
             token: generateToken(user)
           })
@@ -40,21 +41,12 @@ router.post('/login', async (req, res) => {
       }
     })
   } catch(e) {
-    res.status(404).json({ error: { message: `Couldn't find the user ${req.body.username}`}})
+    res.status(404).json({ error: { message: `No user exists with the email of ${req.body.email}`}})
   }
-
-  router.post('/logout', function  (req, res) {
-    if (req.token) {
-      req.token.destroy()
-      res.status(200).send("Logged out successfully. Goodbye 👋🏾")
-    } else {
-      res.status(401).send("Invalid request: Please supply a token in the body of your request.")
-    }
-  })
 
   function generateToken(user) {
     const payload = {
-      username: user.username,
+      email: user.email,
       subject: user.id,
     }
     const options = { expiresIn: '1h' }
