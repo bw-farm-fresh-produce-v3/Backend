@@ -19,16 +19,23 @@ describe('GET /api/users', () => {
         await request(server)
             .post('/api/auth/register')
             .send({
-                username: 'Pickle Rick',
-                password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
+                email: 'test@test.com',
+                password: 'password',
+                first_name: "Sean",
+                last_name: "Halsberg",
+                city: "San Francisco",
+                state: "California",
+                zip: 94016,
+                latitude: 123412.3413421,
+                longitude: 234532.215235
             })
 
         // login new user to get token
         const { body: { token } } = await request(server)
             .post('/api/auth/login')
             .send({
-                username: 'Pickle Rick',
-                password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
+                email: 'test@test.com',
+                password: 'password',
             })
             
         let users = await request(server).get('/api/users').set({Authorization: token})
@@ -67,19 +74,27 @@ describe('Auth Router', () => {
             await request(server)
                 .post('/api/auth/register')
                 .send({
-                    username: 'Pickle Rick',
-                    password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
+                    email: 'test@test.com',
+                    password: 'password',
+                    first_name: "Sean",
+                    last_name: "Halsberg",
+                    city: "San Francisco",
+                    state: "California",
+                    zip: 94016,
+                    latitude: 123412.3413421,
+                    longitude: 234532.215235
                 })
         
             // login new user to get token
             const { body: { token } } = await request(server)
                 .post('/api/auth/login')
                 .send({
-                    username: 'Pickle Rick',
-                    password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
+                    email: 'test@test.com',
+                    password: 'password'
                 })
                 
                 let users =  await request(server).get('/api/users').set({Authorization: token})
+                console.log(users)
                 expect(users.body).toHaveLength(1)
         })
 
@@ -88,7 +103,7 @@ describe('Auth Router', () => {
             const { status } = await request(server)
                 .post('/api/auth/register')
                 .send({
-                    username: 'Pickle Rick',
+                    email: 'Pickle Rick',
                     password: 'Look Morty, I\'m a pickle! I\'m Pickle Riiiiiiiick!'
                 })
 
