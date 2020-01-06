@@ -25,8 +25,7 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    // TODO: Change this URL to that of deployed db
-    connection: "postgres://localhost/webauth-iii-challenge",
+    connection: "postgres://yckpaeucakrgnx:0d644077a03e414b997d5f9b49af064ca2f4aa81c6303dd8252f8163bee8b056@ec2-174-129-33-19.compute-1.amazonaws.com:5432/d83gaji8t8j5ki",
     pool: {
       min: 2,
       max: 10
