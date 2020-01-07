@@ -8,11 +8,6 @@ function getById(id) {
     return db("shops").where({id})
 }  
 
-function getProductsThatBelongToShop(id) {
-    return db("products")
-        .where({shop_id: id})
-}
-
 function insert(shopInfo) {
     return db("shops")
         .insert(shopInfo)
@@ -34,7 +29,6 @@ function remove(id) {
 module.exports = {
     getAll,
     getById,
-    getProductsThatBelongToShop,
     insert,
     update,
     remove
