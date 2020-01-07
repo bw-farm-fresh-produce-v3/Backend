@@ -10,9 +10,11 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('shops')
+            .onUpdate("CASCADE")
+            .onDelete("CASCADE")
 
         tbl.text('name').notNullable()
-        tbl.integer('unit').notNullable()
+        tbl.text('unit').notNullable()
         tbl.float('price').notNullable()
         tbl.boolean('available').defaultTo(false)
         tbl.text("description")

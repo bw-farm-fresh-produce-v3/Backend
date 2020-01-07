@@ -10,6 +10,8 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('users')
+            .onUpdate("CASCADE")
+            .onDelete("CASCADE")
 
         tbl.text('title').notNullable()
         tbl.text('description')

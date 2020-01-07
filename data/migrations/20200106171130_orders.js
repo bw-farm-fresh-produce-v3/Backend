@@ -8,6 +8,8 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('users')
+            .onUpdate("CASCADE")
+            .onDelete("CASCADE")
     })
 };
 

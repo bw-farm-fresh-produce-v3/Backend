@@ -8,11 +8,15 @@ exports.up = function(knex) {
             .unsigned()
             .references('id')
             .inTable('shops')
+            .onUpdate("CASCADE")
+            .onDelete("CASCADE")
         tbl.integer('user_id')
             .notNullable()
             .unsigned()
             .references('id')
             .inTable('users')
+            .onUpdate("CASCADE")
+            .onDelete("CASCADE")
     })
 };
 
