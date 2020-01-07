@@ -10,9 +10,11 @@ router.post('/register', (req, res) => {
     bcrypt.hash(req.body.password, 8, async (err, encryptedPw) => {
       if (err) res.status(500).json({error: { message: 'Internal server error.'}})
       else {
+        console.log("=====before parsing========", req.body)
         req.body.password_hash = encryptedPw
         delete req.body.password
         req.body.zip = parseInt(req.body.zip)
+        console.log("======after parsing========", req.body)
         
         const newUser = await authModel.create(req.body)
         res.status(201).json(newUser)
