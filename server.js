@@ -6,6 +6,7 @@ const helmet = require('helmet')
 const cors = require('cors')
 
 const authRouter = require('./routes/auth-router')
+const shopsRouter = require('./routes/shops-router')
 
 const server = express()
 
@@ -21,6 +22,7 @@ server.use(cors())
  */
  
 server.use('/api/auth', authRouter)
+server.use('/api/shops', shopsRouter)
 
 server.get('/', function ping (req, res) {
     res.status(200).json({ api: "running" })
