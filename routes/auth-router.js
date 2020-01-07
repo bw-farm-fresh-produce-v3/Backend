@@ -12,6 +12,8 @@ router.post('/register', (req, res) => {
       else {
         req.body.password_hash = encryptedPw
         delete req.body.password
+        req.body.zip = parseInt(req.body.zip)
+        
         const newUser = await authModel.create(req.body)
         res.status(201).json(newUser)
       }
