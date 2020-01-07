@@ -1,10 +1,10 @@
-const router = require('express').Router();
+const router = require('express').Router({mergeParams: true});
 const Shops = require('../models/shops-model')
 const authenticate = require("../middleware/authenticate")
+const productsRouter = require("../routes/products-router")
 
 // router.use(authenticate)
 
-// retrive a list of products for a parti
 // GET /api/shops
 router.get("/", async function (req, res) {
     try {
@@ -16,10 +16,11 @@ router.get("/", async function (req, res) {
     }
 })
 
-router.get("/:id", function(req, res) {
+// router.get("/:id", function(req, res) {
+    
+// })
 
-})
-
-router.post("/")
+// /api/shops/id
+router.use("/:id/products", productsRouter)
 
 module.exports = router
